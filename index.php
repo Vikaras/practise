@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <title>Title</title>
@@ -39,7 +39,7 @@
                             <div class="form-group">
                                 <label for="selectTable">Select Table*:
                                     <select name="selectTable" id="selectTable" class="form-control form-input select-table">
-                                        <option value=""></option>
+                                        <option></option>
                                     </select>
                                 </label>
                             </div>
@@ -65,6 +65,6 @@
         </div>
     </div>
 </div>
-<script src="js/script.js"></script>
 </body>
+<script src="js/script.js"></script>
 </html>

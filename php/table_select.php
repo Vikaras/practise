@@ -2,7 +2,7 @@
 
 include "db.php";
 
-$stmt = $conn->prepare("SELECT * FROM tables");
+$stmt = $conn->prepare("SELECT table_name FROM tables");
 
 if ($stmt->execute(array())) {
     $table = array();
