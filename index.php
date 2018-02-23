@@ -38,7 +38,9 @@
                             </div>
                             <div class="form-group">
                                 <label for="selectTable">Select Table*:
-                                    <select name="selectTable" id="selectTable" class="form-control form-input"></select>
+                                    <select name="selectTable" id="selectTable" class="form-control form-input select-table">
+                                        <option value=""></option>
+                                    </select>
                                 </label>
                             </div>
                             <div class="form-group">
@@ -49,6 +51,12 @@
                                               style="resize: none" required>
                             </textarea>
                                 </label>
+                            </div>
+                            <div class="modal-header">
+                                <h4 class="modal-title">Registration</h4>
+                            </div>
+                            <div id="reg-wrap">
+
                             </div>
                         </form>
                     </div>
