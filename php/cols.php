@@ -4,7 +4,7 @@ include "db.php";
 
     $stmt = $conn->prepare("SELECT COLUMN_NAME FROM information_schema.columns
                         WHERE TABLE_SCHEMA = 'tool'
-                        and TABLE_NAME = '" . strtolower($_GET['table']) . "' ");
+                        and TABLE_NAME = '" . strtolower($_GET['tbl']) . "' ");
 
     if ($stmt->execute(array())) {
         $cols = array();
