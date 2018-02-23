@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 22, 2018 at 01:13 PM
+-- Generation Time: Feb 23, 2018 at 04:47 PM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -41,10 +41,10 @@ CREATE TABLE `inventory` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `inventory_perm`
+-- Table structure for table `inventory_cols`
 --
 
-CREATE TABLE `inventory_perm` (
+CREATE TABLE `inventory_cols` (
   `inv_id` int(11) NOT NULL,
   `invcode` tinyint(1) NOT NULL,
   `description` tinyint(1) NOT NULL,
@@ -87,9 +87,7 @@ CREATE TABLE `reports` (
   `id` int(11) NOT NULL,
   `lists` varchar(255) NOT NULL,
   `table_id` int(11) NOT NULL,
-  `comments` varchar(255) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `inv_id` int(11) DEFAULT NULL
+  `comments` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -131,10 +129,10 @@ CREATE TABLE `users` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users_perm`
+-- Table structure for table `users_cols`
 --
 
-CREATE TABLE `users_perm` (
+CREATE TABLE `users_cols` (
   `user_id` int(11) NOT NULL,
   `name` tinyint(1) NOT NULL,
   `lastname` tinyint(1) NOT NULL,
@@ -158,9 +156,9 @@ ALTER TABLE `inventory`
   ADD KEY `inv_id` (`inv_id`);
 
 --
--- Indexes for table `inventory_perm`
+-- Indexes for table `inventory_cols`
 --
-ALTER TABLE `inventory_perm`
+ALTER TABLE `inventory_cols`
   ADD PRIMARY KEY (`inv_id`),
   ADD KEY `inv_id` (`inv_id`);
 
@@ -176,8 +174,6 @@ ALTER TABLE `job_filter`
 --
 ALTER TABLE `reports`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `inv_id` (`inv_id`),
   ADD KEY `table_name` (`table_id`),
   ADD KEY `id` (`id`);
 
@@ -197,9 +193,9 @@ ALTER TABLE `users`
   ADD KEY `job_id` (`job_id`);
 
 --
--- Indexes for table `users_perm`
+-- Indexes for table `users_cols`
 --
-ALTER TABLE `users_perm`
+ALTER TABLE `users_cols`
   ADD PRIMARY KEY (`user_id`),
   ADD KEY `user_id` (`user_id`);
 
@@ -208,9 +204,9 @@ ALTER TABLE `users_perm`
 --
 
 --
--- AUTO_INCREMENT for table `inventory_perm`
+-- AUTO_INCREMENT for table `inventory_cols`
 --
-ALTER TABLE `inventory_perm`
+ALTER TABLE `inventory_cols`
   MODIFY `inv_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -238,9 +234,9 @@ ALTER TABLE `users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `users_perm`
+-- AUTO_INCREMENT for table `users_cols`
 --
-ALTER TABLE `users_perm`
+ALTER TABLE `users_cols`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -251,8 +247,7 @@ ALTER TABLE `users_perm`
 -- Constraints for table `inventory`
 --
 ALTER TABLE `inventory`
-  ADD CONSTRAINT `inventory_ibfk_1` FOREIGN KEY (`inv_id`) REFERENCES `inventory_perm` (`inv_id`),
-  ADD CONSTRAINT `inventory_ibfk_2` FOREIGN KEY (`inv_id`) REFERENCES `reports` (`inv_id`);
+  ADD CONSTRAINT `inventory_ibfk_1` FOREIGN KEY (`inv_id`) REFERENCES `inventory_cols` (`inv_id`);
 
 --
 -- Constraints for table `reports`
@@ -264,8 +259,7 @@ ALTER TABLE `reports`
 -- Constraints for table `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users_perm` (`user_id`),
-  ADD CONSTRAINT `users_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `reports` (`user_id`),
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users_cols` (`user_id`),
   ADD CONSTRAINT `users_ibfk_3` FOREIGN KEY (`job_id`) REFERENCES `job_filter` (`job_id`);
 COMMIT;
 

@@ -2,14 +2,14 @@
 
 include "db.php";
 
-$stmt = $conn->prepare("SELECT table_name FROM tables");
+$stmt = $conn->prepare("SELECT * FROM tables");
 
 if ($stmt->execute(array())) {
-    $table = array();
+    $data = array();
     while ($row = $stmt->fetch()) {
-        $table[] = $row;
+        $data[] = $row;
     }
-    echo json_encode($table);
+    echo json_encode($data);
 }
 
 

@@ -1,14 +1,15 @@
 // FILLING SELECT OPTIONS TO SELECT TABLE
-$.getJSON("http://localhost/tool/php/table_select.php", function (table) {
-    for (i = 0; i < table.length; i++) {
+$.getJSON("http://localhost/tool/php/table_select.php", function (data) {
+    for (i = 0; i < data.length; i++) {
         $('.select-table').append(
-            "<option>" + table[i].table_name + "</option>"
+            "<option value='"+ data[i].table_id +"' data-table-name='"+ data[i].table_name +"'>" +
+            "" + data[i].table_name + "</option>"
         )
     }
 });
 // DISPLAYING COLUMNS OF CURRENT SELECTED TABLE
 $('.select-table').on('change', function () {
-    var tbl = document.querySelector('.select-table').value;
+    var tbl = $(".select-table option:selected").text();
     $('.settings').empty();
     $('.settings').append(
         "<div class='table-responsive'>" +
@@ -19,11 +20,11 @@ $('.select-table').on('change', function () {
         + "</table>"
         + "</div>"
     );
-    $.getJSON("http://localhost/tool/php/cols.php?tbl=" + tbl, function (cols) {
-        for (i = 0; i < cols.length; i++) {
+    $.getJSON("http://localhost/tool/php/cols.php?tbl=" + tbl, function (data) {
+        for (i = 0; i < data.length; i++) {
             $('#set_table').append(
                 "<tr>" +
-                "<td>" + cols[i].COLUMN_NAME + "</td>" +
+                "<td>" + data[i].COLUMN_NAME + "</td>" +
                 "<td>" + "<input type='checkbox'>" + "</td>"
                 + "</tr>"
             )

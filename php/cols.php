@@ -7,11 +7,11 @@ include "db.php";
                         and TABLE_NAME = '" . strtolower($_GET['tbl']) . "' ");
 
     if ($stmt->execute(array())) {
-        $cols = array();
+        $data = array();
         while ($row = $stmt->fetch()) {
-            $cols[] = $row;
+            $data[] = $row;
         }
-        echo json_encode($cols);
+        echo json_encode($data);
     }
 
 
