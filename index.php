@@ -31,20 +31,21 @@
                         <p class="form-paragraph lead">*-Required fields</p>
                         <form action="" method="post" id="insert_form">
                             <div class="form-group">
-                                <label for="repName">Enter name*:
+                                <label for="repName">Enter list name*:
                                     <input type="text" name="repName" id="repName" class="form-control form-input"
                                            required>
                                 </label>
                             </div>
                             <div class="form-group">
                                 <label for="selectTable">Select Table*:
-                                    <select name="selectTable" id="selectTable" class="form-control form-input select-table">
+                                    <select name="selectTable" id="selectTable"
+                                            class="form-control form-input select-table">
                                         <option></option>
                                     </select>
                                 </label>
                             </div>
                             <div class="form-group">
-                                <label for="reportComment">Report comment*:
+                                <label for="reportComment">List comment*:
                                     <textarea name="reportComment" id="reportComment" class="form-control form-input"
                                               cols="30"
                                               rows="10"
@@ -52,11 +53,7 @@
                             </textarea>
                                 </label>
                             </div>
-                            <div class="modal-header">
-                                <h4 class="modal-title">Registration</h4>
-                            </div>
-                            <div id="reg-wrap">
-
+                            <div class="form-group settings">
                             </div>
                         </form>
                     </div>
