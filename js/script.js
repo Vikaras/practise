@@ -15,13 +15,13 @@ $('.select-table').on('change', function () {
         "<div class='table-responsive'>" +
         "<table class='table table-bordered' id='set_table'>" +
         "<tr>" +
-        "<th colspan='2'>Choose columns</th>"
+        "<th colspan='2'>Select columns and settings</th>"
         + "</tr>"
         + "</table>"
         + "</div>"
     );
-    $.getJSON("http://localhost/tool/php/cols.php?tbl=" + tbl, function (data) {
-        for (i = 0; i < data.length; i++) {
+    $.getJSON("http://localhost/tool/php/cols.php?tbl=" + tbl + "_cols", function (data) {
+        for (i = 1; i < data.length; i++) {
             $('#set_table').append(
                 "<tr>" +
                 "<td>" + data[i].COLUMN_NAME + "</td>" +

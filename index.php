@@ -40,9 +40,11 @@
                                 <label for="selectTable">Select Table*:
                                     <select name="selectTable" id="selectTable"
                                             class="form-control form-input select-table">
-                                        <option></option>
+                                        <option>--Select--</option>
                                     </select>
                                 </label>
+                            </div>
+                            <div class="form-group settings">
                             </div>
                             <div class="form-group">
                                 <label for="reportComment">List comment*:
@@ -53,9 +55,11 @@
                             </textarea>
                                 </label>
                             </div>
-                            <div class="form-group settings">
-                            </div>
+                            <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-success">
                         </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
                     </div>
                 </div>
             </div>
