@@ -40,20 +40,18 @@ $('.select-table').on('change', function () {
 
 // INSERTING TABLE CONFIG TO DATABASE
 $('#config_form').on('submit', function (e) {
-    e.preventDefault();
-
 // checking if one or more checkboxes is checked
-    if ($("[type=checkbox]:checked").length > 0) {
 
+    if ($("[type=checkbox]:checked").length > 0) {
 // creating array to store checkbox values
         var checkboxes = [];
+
         $(".check_cols").each(function () {
             checkboxes.push({
                 name: $(this).data('col-name'),
                 value: $(this).val()
             });
         });
-
 // calling ajax to store configs
         $.ajax({
             url: "php/tbl_config.php",
@@ -66,13 +64,16 @@ $('#config_form').on('submit', function (e) {
             },
 
             success: function (data) {
+                alert("Data inserted secsesfully");
                 $('.config').html(data);
-                $('#config_form')[0].reset();
+                $('#config_form').triger('reset');
                 $('#add_data_modal').modal("hide");
             }
         })
 
     } else {
+
+        e.preventDefault();
         alert("Select one or more checkboxes to continue");
     }
 });
