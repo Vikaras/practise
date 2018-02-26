@@ -25,9 +25,37 @@ $('.select-table').on('change', function () {
             $('#set_table').append(
                 "<tr>" +
                 "<td>" + data[i].COLUMN_NAME + "</td>" +
-                "<td>" + "<input type='checkbox'>" + "</td>"
+                "<td>" + "<input class='check_cols' type='checkbox' name='checkboxes[]' value='0'>" + "</td>"
                 + "</tr>"
             )
+        }
+    })
+});
+
+// ADDING VALUE TO CHECKBOX
+$(document).on('click', '.check_cols', function () {
+   $(this).prop("checked") ? $(this).val(1) : $(this).val(0);
+});
+
+// INSERTING CHECKBOX VALUES TO DATABASE
+$('#config_form').on('submit', function (e) {
+    e.preventDefault();
+
+
+    var checkboxes = new Array();
+    $(".check_cols").each(function () {
+        checkboxes.push($(this).val());
+    });
+
+    $.ajax({
+        url:"php/chk_insert.php",
+        method:"POST",
+        data:{checkboxes:checkboxes},
+
+        success: function (data) {
+            $('.config').html(data);
+            $('#add_data_modal').modal("hide");
+            // $('#config_form')[0].reset();
         }
     })
 });

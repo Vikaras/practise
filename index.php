@@ -18,7 +18,7 @@
             </button>
         </div>
         <div id="live_data"></div>
-        <!--MODAL TO ADD NEW REPORT-->
+        <!--MODAL TO ADD NEW CONFIG-->
         <div id="add_data_modal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -26,10 +26,10 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">New report details</h4>
                     </div>
-                    <!--FORM TO ADD NEW DATA TO DB-->
-                    <div class="modal-body">
+                    <!--CONFIGS INFO-->
+                    <div class="modal-body config">
                         <p class="form-paragraph lead">*-Required fields</p>
-                        <form action="" method="post" id="insert_form">
+                        <form action="" method="post" id="config_form">
                             <div class="form-group">
                                 <label for="repName">Enter list name*:
                                     <input type="text" name="repName" id="repName" class="form-control form-input"
@@ -55,7 +55,7 @@
                             </textarea>
                                 </label>
                             </div>
-                            <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-success">
+                            <input type="submit" name="submit" value="Insert" class="btn btn-success">
                         </form>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
