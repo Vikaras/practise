@@ -2,14 +2,16 @@
 $.getJSON("http://localhost/tool/php/table_select.php", function (data) {
     for (i = 0; i < data.length; i++) {
         $('.select-table').append(
-            "<option value='"+ data[i].table_id +"' data-table-name='"+ data[i].table_name +"'>" +
+            "<option value='" + data[i].table_id + "' data-table-name='" + data[i].table_name + "'>" +
             "" + data[i].table_name + "</option>"
         )
     }
 });
+
 // DISPLAYING COLUMNS OF CURRENT SELECTED TABLE
 $('.select-table').on('change', function () {
-    var tbl = $(".select-table option:selected").text();
+    var tbl = $(".select-table option:selected").text() + "_cols";
+    console.log(tbl);
     $('.settings').empty();
     $('.settings').append(
         "<div class='table-responsive'>" +
@@ -20,42 +22,48 @@ $('.select-table').on('change', function () {
         + "</table>"
         + "</div>"
     );
-    $.getJSON("http://localhost/tool/php/cols.php?tbl=" + tbl + "_cols", function (data) {
+    $.getJSON("http://localhost/tool/php/cols.php?tbl=" + tbl, function (data) {
         for (i = 1; i < data.length; i++) {
             $('#set_table').append(
                 "<tr>" +
                 "<td>" + data[i].COLUMN_NAME + "</td>" +
-                "<td>" + "<input class='check_cols' type='checkbox' name='checkboxes[]' value='0'>" + "</td>"
+                "<td>" + "<input class='check_cols' type='checkbox' name='checkboxes[" + data[i].COLUMN_NAME + "]' data-col-name='" + data[i].COLUMN_NAME + "' value='0'>" + "</td>"
                 + "</tr>"
-            )
+            );
+            // ADDING VALUES TO CHECKBOXES
+            $(document).on('click', '.check_cols', function () {
+                $(this).prop("checked") ? $(this).val(1) : $(this).val(0);
+            });
         }
     })
 });
 
-// ADDING VALUE TO CHECKBOX
-$(document).on('click', '.check_cols', function () {
-   $(this).prop("checked") ? $(this).val(1) : $(this).val(0);
-});
-
-// INSERTING CHECKBOX VALUES TO DATABASE
-$('#config_form').on('submit', function (e) {
-    e.preventDefault();
-
-
-    var checkboxes = new Array();
+// INSERTING TABLE CONFIG TO DATABASE
+$('#config_form').on('submit', function () {
+// creating array to store checkbox values
+    var checkboxes = [];
     $(".check_cols").each(function () {
-        checkboxes.push($(this).val());
+        checkboxes.push({
+            name: $(this).data('col-name'),
+            value: $(this).val()
+        });
     });
-
+// calling ajax to store configs
     $.ajax({
-        url:"php/chk_insert.php",
-        method:"POST",
-        data:{checkboxes:checkboxes},
+        url: "php/tbl_config.php",
+        method: "POST",
+        data: {
+            checkboxes: JSON.stringify(checkboxes),
+            tbl: $("#selectTable").val(),
+            repName: $("#repName").val(),
+            repComments: $("#reportComment").val()
+        },
 
         success: function (data) {
             $('.config').html(data);
+            $('#config_form')[0].reset();
             $('#add_data_modal').modal("hide");
-            // $('#config_form')[0].reset();
         }
     })
 });
+
