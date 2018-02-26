@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 23, 2018 at 04:47 PM
+-- Generation Time: Feb 26, 2018 at 02:28 PM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -45,15 +45,16 @@ CREATE TABLE `inventory` (
 --
 
 CREATE TABLE `inventory_cols` (
+  `report_id` smallint(5) UNSIGNED NOT NULL,
   `inv_id` int(11) NOT NULL,
-  `invcode` tinyint(1) NOT NULL,
-  `description` tinyint(1) NOT NULL,
-  `location` tinyint(1) NOT NULL,
-  `value` tinyint(1) NOT NULL,
-  `comment` tinyint(1) NOT NULL,
-  `manufactid` tinyint(1) NOT NULL,
-  `edit` tinyint(1) NOT NULL,
-  `filter` tinyint(1) NOT NULL
+  `invcode` tinyint(1) NOT NULL DEFAULT '0',
+  `description` tinyint(1) NOT NULL DEFAULT '0',
+  `location` tinyint(1) NOT NULL DEFAULT '0',
+  `value` tinyint(1) NOT NULL DEFAULT '0',
+  `comment` tinyint(1) NOT NULL DEFAULT '0',
+  `manufactid` tinyint(1) NOT NULL DEFAULT '0',
+  `edit` tinyint(1) NOT NULL DEFAULT '0',
+  `filter` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -84,7 +85,7 @@ INSERT INTO `job_filter` (`job_id`, `job_name`) VALUES
 --
 
 CREATE TABLE `reports` (
-  `id` int(11) NOT NULL,
+  `id` smallint(5) UNSIGNED NOT NULL,
   `lists` varchar(255) NOT NULL,
   `table_id` int(11) NOT NULL,
   `comments` varchar(255) NOT NULL
@@ -119,7 +120,7 @@ CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
-  `dob` varchar(255) NOT NULL,
+  `birth` varchar(255) NOT NULL,
   `phone` varchar(255) NOT NULL,
   `job` varchar(255) NOT NULL,
   `comment` varchar(255) NOT NULL,
@@ -133,15 +134,16 @@ CREATE TABLE `users` (
 --
 
 CREATE TABLE `users_cols` (
+  `report_id` smallint(5) UNSIGNED NOT NULL,
   `user_id` int(11) NOT NULL,
-  `name` tinyint(1) NOT NULL,
-  `lastname` tinyint(1) NOT NULL,
-  `dob` tinyint(1) NOT NULL,
-  `phone` tinyint(1) NOT NULL,
-  `job` tinyint(1) NOT NULL,
-  `comment` tinyint(1) NOT NULL,
-  `edit` tinyint(1) NOT NULL,
-  `filter` tinyint(1) NOT NULL
+  `name` tinyint(1) NOT NULL DEFAULT '0',
+  `lastname` tinyint(1) NOT NULL DEFAULT '0',
+  `birth` tinyint(1) NOT NULL DEFAULT '0',
+  `phone` tinyint(1) NOT NULL DEFAULT '0',
+  `job` tinyint(1) NOT NULL DEFAULT '0',
+  `comment` tinyint(1) NOT NULL DEFAULT '0',
+  `edit` tinyint(1) NOT NULL DEFAULT '0',
+  `filter` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -160,7 +162,8 @@ ALTER TABLE `inventory`
 --
 ALTER TABLE `inventory_cols`
   ADD PRIMARY KEY (`inv_id`),
-  ADD KEY `inv_id` (`inv_id`);
+  ADD KEY `inv_id` (`inv_id`),
+  ADD KEY `report_id_fk1` (`report_id`);
 
 --
 -- Indexes for table `job_filter`
@@ -197,7 +200,8 @@ ALTER TABLE `users`
 --
 ALTER TABLE `users_cols`
   ADD PRIMARY KEY (`user_id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `report_id_fk` (`report_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -219,7 +223,7 @@ ALTER TABLE `job_filter`
 -- AUTO_INCREMENT for table `reports`
 --
 ALTER TABLE `reports`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tables`
@@ -250,6 +254,12 @@ ALTER TABLE `inventory`
   ADD CONSTRAINT `inventory_ibfk_1` FOREIGN KEY (`inv_id`) REFERENCES `inventory_cols` (`inv_id`);
 
 --
+-- Constraints for table `inventory_cols`
+--
+ALTER TABLE `inventory_cols`
+  ADD CONSTRAINT `report_id_fk1` FOREIGN KEY (`report_id`) REFERENCES `reports` (`id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `reports`
 --
 ALTER TABLE `reports`
@@ -261,6 +271,12 @@ ALTER TABLE `reports`
 ALTER TABLE `users`
   ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users_cols` (`user_id`),
   ADD CONSTRAINT `users_ibfk_3` FOREIGN KEY (`job_id`) REFERENCES `job_filter` (`job_id`);
+
+--
+-- Constraints for table `users_cols`
+--
+ALTER TABLE `users_cols`
+  ADD CONSTRAINT `report_id_fk` FOREIGN KEY (`report_id`) REFERENCES `reports` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

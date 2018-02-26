@@ -39,7 +39,7 @@
                             <div class="form-group">
                                 <label for="selectTable">Select Table*:
                                     <select name="selectTable" id="selectTable"
-                                            class="form-control form-input select-table">
+                                            class="form-control form-input select-table" required>
                                         <option>--Select--</option>
                                     </select>
                                 </label>

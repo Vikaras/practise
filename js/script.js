@@ -11,7 +11,7 @@ $.getJSON("http://localhost/tool/php/table_select.php", function (data) {
 // DISPLAYING COLUMNS OF CURRENT SELECTED TABLE
 $('.select-table').on('change', function () {
     var tbl = $(".select-table option:selected").text() + "_cols";
-    console.log(tbl);
+
     $('.settings').empty();
     $('.settings').append(
         "<div class='table-responsive'>" +
@@ -23,7 +23,7 @@ $('.select-table').on('change', function () {
         + "</div>"
     );
     $.getJSON("http://localhost/tool/php/cols.php?tbl=" + tbl, function (data) {
-        for (i = 1; i < data.length; i++) {
+        for (i = 2; i < data.length; i++) {
             $('#set_table').append(
                 "<tr>" +
                 "<td>" + data[i].COLUMN_NAME + "</td>" +
@@ -39,31 +39,41 @@ $('.select-table').on('change', function () {
 });
 
 // INSERTING TABLE CONFIG TO DATABASE
-$('#config_form').on('submit', function () {
-// creating array to store checkbox values
-    var checkboxes = [];
-    $(".check_cols").each(function () {
-        checkboxes.push({
-            name: $(this).data('col-name'),
-            value: $(this).val()
-        });
-    });
-// calling ajax to store configs
-    $.ajax({
-        url: "php/tbl_config.php",
-        method: "POST",
-        data: {
-            checkboxes: JSON.stringify(checkboxes),
-            tbl: $("#selectTable").val(),
-            repName: $("#repName").val(),
-            repComments: $("#reportComment").val()
-        },
+$('#config_form').on('submit', function (e) {
+    e.preventDefault();
 
-        success: function (data) {
-            $('.config').html(data);
-            $('#config_form')[0].reset();
-            $('#add_data_modal').modal("hide");
-        }
-    })
+// checking if one or more checkboxes is checked
+    if ($("[type=checkbox]:checked").length > 0) {
+
+// creating array to store checkbox values
+        var checkboxes = [];
+        $(".check_cols").each(function () {
+            checkboxes.push({
+                name: $(this).data('col-name'),
+                value: $(this).val()
+            });
+        });
+
+// calling ajax to store configs
+        $.ajax({
+            url: "php/tbl_config.php",
+            method: "POST",
+            data: {
+                checkboxes: JSON.stringify(checkboxes),
+                tbl: $("#selectTable").val(),
+                repName: $("#repName").val(),
+                repComments: $("#reportComment").val()
+            },
+
+            success: function (data) {
+                $('.config').html(data);
+                $('#config_form')[0].reset();
+                $('#add_data_modal').modal("hide");
+            }
+        })
+
+    } else {
+        alert("Select one or more checkboxes to continue");
+    }
 });
 
