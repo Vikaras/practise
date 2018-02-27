@@ -94,13 +94,6 @@ $.getJSON("http://localhost/tool/php/fetch.php?all", function (data) {
 
     }
 });
-// $.getJSON("http://localhost/tool/php/delet.php?all", function (data){
-//     $(document).ready(function(){
-//         $('.delete_config').click(function() {
-//             $.post('delete.php?mode=delete', { row_id: $(this).data('row_id')}).done(function(data) {
-//                 // Reload your table/data display
-//             });
-//         });
-//     });
+// $.ge
 // }
 
