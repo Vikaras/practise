@@ -94,6 +94,4 @@ $.getJSON("http://localhost/tool/php/fetch.php?all", function (data) {
 
     }
 });
-// $.ge
-// }
 
