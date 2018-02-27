@@ -88,7 +88,7 @@ $.getJSON("http://localhost/tool/php/fetch.php?all", function (data) {
             "<td>" + data[i].comments + "</td>" +
             "<td>" + (data[i].edit === "1" ? "<input type='button' data-edit-id='" + data[i].id + "' value='Edit' " +
                 "class='btn btn-warning btn-xs edit_config'>" : "") + " " +
-            "<input type='button' value='Delete' class='btn btn-danger btn-xs delete_config'>" + "</td>" +
+            "<input type='button' data-delete-id='" + data[i].id +"' value='Delete'  class='btn btn-danger btn-xs delete_config'>" + "</td>" +
             "</tr>");
 
     }
@@ -102,8 +102,27 @@ $(document).on('click', '.edit_config', function () {
 
     $.getJSON("http://localhost/tool/php/edit_table.php?edit_id=" + edit_id, function (data) {
         for(i = 0; i < data.length; i++) {
-
         }
     })
 
 });
+// Deleting whole database table from DB
+$(document).on('click', '.delete_config', function () {
+    var delete_id = $(this).data('delete-id');
+
+    if (confirm("Are you sure you want to delete this table configuration?")) {
+
+        $.ajax({
+            url:"php/delete.php?",
+            method: "POST",
+            data:{delete_id:delete_id},
+            success: function () {
+                location.reload();
+                window.location.href = "index.php";
+            }
+        });
+    }
+    return false;
+});
+
+
