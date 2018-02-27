@@ -80,21 +80,22 @@ $('#config_form').on('submit', function () {
 
 // FETCHING TABLE CONFIGS AND FILLING TABLE
 $.getJSON("http://localhost/tool/php/fetch.php?all", function (data) {
-    for( i = 0; i < data.length; i++) {
-        $('#fetch_table').append("<tr>"+
+    for (i = 0; i < data.length; i++) {
+        $('#fetch_table').append("<tr>" +
             "<td>" + data[i].id + "</td>" +
             "<td>" + data[i].lists + "</td>" +
             "<td>" + data[i].table_name + "</td>" +
-            "<td>" + data[i].comments + "</td>"+
+            "<td>" + data[i].comments + "</td>" +
             "<td>" + (data[i].edit === "1" ? "<input type='button' value='Edit' " +
-                "class='btn btn-danger btn-xs edit_config'>" : "") + "</td>"+
-             "</tr>" );
+                "class='btn btn-success btn-xs edit_config'>" : "") +
+            "<input type='button' value='Delete' class='btn btn-danger btn-xs delete_config'>" + "</td>" +
+            "</tr>");
 
     }
 });
 
 // CALLING MODAL TO EDIT TABLE CONFIG
-$(document).on('click','.edit_config', function () {
+$(document).on('click', '.edit_config', function () {
 
     $('#edit_table_config').modal("show");
 
