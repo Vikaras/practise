@@ -92,3 +92,10 @@ $.getJSON("http://localhost/tool/php/fetch.php?all", function (data) {
 
     }
 });
+
+// CALLING MODAL TO EDIT TABLE CONFIG
+$(document).on('click','.edit_config', function () {
+
+    $('#edit_table_config').modal("show");
+
+});

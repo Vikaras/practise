@@ -74,6 +74,52 @@
                 </div>
             </div>
         </div>
+        <!--MODAL TO EDIT TABLE CONFIG-->
+        <div id="edit_table_config" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Edit report details</h4>
+                    </div>
+                    <!--CONFIGS INFO-->
+                    <div class="modal-body config">
+                        <p class="form-paragraph lead">*-Required fields</p>
+                        <form action="" method="post" id="edit_form">
+                            <div class="form-group">
+                                <label for="editName">Edit list name*:
+                                    <input type="text" name="editName" id="editName" class="form-control form-input"
+                                           required>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label for="editSelectTable">Select Table:
+                                    <select name="editSelectTable" id="editSelectTable"
+                                            class="form-control form-input edit-select-table" required>
+                                    </select>
+                                </label>
+                            </div>
+                            <div class="form-group edit_settings">
+                            </div>
+                            <div class="form-group">
+                                <label for="editComment">Edit list comment*:
+                                    <textarea name="editComment" id="editComment"
+                                              class="form-control form-input"
+                                              cols="30"
+                                              rows="10"
+                                              style="resize: none" required>
+                            </textarea>
+                                </label>
+                            </div>
+                            <input type="submit" name="update" value="Update" class="btn btn-success">
+                        </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>
