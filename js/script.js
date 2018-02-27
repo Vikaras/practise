@@ -87,9 +87,20 @@ $.getJSON("http://localhost/tool/php/fetch.php?all", function (data) {
             "<td>" + data[i].table_name + "</td>" +
             "<td>" + data[i].comments + "</td>"+
             "<td>" + (data[i].edit === "1" ? "<input type='button' value='Edit' " +
-                "class='btn btn-success btn-xs edit_config'>" +  "<input type='button' value='Delete' " +
-                "class='btn btn-danger btn-xs delete_config'>": "") + "</td>"+
+                "class='btn btn-success btn-xs edit_config'>": "") + "<input type='button' value='Delete' " +
+            "class='btn btn-danger btn-xs delete_config'>" +"</td>"+
+
              "</tr>" );
 
     }
 });
+// $.getJSON("http://localhost/tool/php/delet.php?all", function (data){
+//     $(document).ready(function(){
+//         $('.delete_config').click(function() {
+//             $.post('delete.php?mode=delete', { row_id: $(this).data('row_id')}).done(function(data) {
+//                 // Reload your table/data display
+//             });
+//         });
+//     });
+// }
+
