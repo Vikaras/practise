@@ -87,7 +87,7 @@ $.getJSON("http://localhost/tool/php/fetch.php?all", function (data) {
             "<td>" + data[i].table_name + "</td>" +
             "<td>" + data[i].comments + "</td>" +
             "<td>" + (data[i].edit === "1" ? "<input type='button' value='Edit' " +
-                "class='btn btn-success btn-xs edit_config'>" : "") +
+                "class='btn btn-warning btn-xs edit_config'>" : "") + " " +
             "<input type='button' value='Delete' class='btn btn-danger btn-xs delete_config'>" + "</td>" +
             "</tr>");
 

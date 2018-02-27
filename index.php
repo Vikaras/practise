@@ -13,7 +13,7 @@
     <div class="table-responsive">
         <h1 align="center">Reports generator</h1>
         <div align="right">
-            <button type="button" data-toggle="modal" data-target="#add_data_modal" class="btn btn-warning">
+            <button type="button" data-toggle="modal" data-target="#add_data_modal" class="btn btn-success">
                 New report
             </button>
         </div>
