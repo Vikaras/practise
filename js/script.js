@@ -78,3 +78,13 @@ $('#config_form').on('submit', function () {
     return false
 });
 
+// FETCHING TABLE CONFIGS AND FILLING TABLE
+$.getJSON("http://localhost/tool/php/fetch.php?all", function (data) {
+    for( i = 0; i < data.length; i++) {
+        $('#fetch_table').append("<tr>"+
+            "<td>" + data[i].id + "</td>" +
+            "<td>" + data[i].lists + "</td>" +
+            "<td>" + data[i].table_name + "</td>" +
+            "<td>" + data[i].comments + "</td>" + "</tr>")
+    }
+});
