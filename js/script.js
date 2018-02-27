@@ -106,7 +106,8 @@ $(document).on('click', '.edit_config', function () {
     })
 
 });
-// Deleting whole database table from DB
+
+// DELETING TABLE CONFIGURATION
 $(document).on('click', '.delete_config', function () {
     var delete_id = $(this).data('delete-id');
 
@@ -117,6 +118,7 @@ $(document).on('click', '.delete_config', function () {
             method: "POST",
             data:{delete_id:delete_id},
             success: function () {
+                alert('Configuration deleted successfully!');
                 location.reload();
                 window.location.href = "index.php";
             }
