@@ -85,6 +85,10 @@ $.getJSON("http://localhost/tool/php/fetch.php?all", function (data) {
             "<td>" + data[i].id + "</td>" +
             "<td>" + data[i].lists + "</td>" +
             "<td>" + data[i].table_name + "</td>" +
-            "<td>" + data[i].comments + "</td>" + "</tr>")
+            "<td>" + data[i].comments + "</td>"+
+            "<td>" + (data[i].edit === "1" ? "<input type='button' value='Edit' " +
+                "class='btn btn-danger btn-xs edit_config'>" : "") + "</td>"+
+             "</tr>" );
+
     }
 });
