@@ -86,7 +86,7 @@ $.getJSON("http://localhost/tool/php/fetch.php?all", function (data) {
             "<td>" + data[i].lists + "</td>" +
             "<td>" + data[i].table_name + "</td>" +
             "<td>" + data[i].comments + "</td>" +
-            "<td>" + (data[i].edit === "1" ? "<input type='button' value='Edit' " +
+            "<td>" + (data[i].edit === "1" ? "<input type='button' data-edit-id='" + data[i].id + "' value='Edit' " +
                 "class='btn btn-warning btn-xs edit_config'>" : "") + " " +
             "<input type='button' value='Delete' class='btn btn-danger btn-xs delete_config'>" + "</td>" +
             "</tr>");
@@ -96,7 +96,14 @@ $.getJSON("http://localhost/tool/php/fetch.php?all", function (data) {
 
 // CALLING MODAL TO EDIT TABLE CONFIG
 $(document).on('click', '.edit_config', function () {
-
     $('#edit_table_config').modal("show");
+
+    var edit_id = $(this).data('edit-id');
+
+    $.getJSON("http://localhost/tool/php/edit_table.php?edit_id=" + edit_id, function (data) {
+        for(i = 0; i < data.length; i++) {
+
+        }
+    })
 
 });
