@@ -17,7 +17,17 @@
                 New report
             </button>
         </div>
-        <div id="live_data"></div>
+        <div id="live_data">
+            <table id="fetch_table" class="table table-bordered">
+                <tr>
+                    <th>ID</th>
+                    <th>Lists</th>
+                    <th>Tables</th>
+                    <th>Comments</th>
+                    <th>Functions</th>
+                </tr>
+            </table>
+        </div>
         <!--MODAL TO ADD NEW CONFIG-->
         <div id="add_data_modal" class="modal fade">
             <div class="modal-dialog">
