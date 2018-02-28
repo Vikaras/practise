@@ -86,7 +86,7 @@
                     <div class="modal-body config">
                         <p class="form-paragraph lead">*-Required fields</p>
                         <form action="" method="post" id="edit_form">
-                            <div class="form-group">
+                            <div class="form-group editName">
                                 <label for="editName">Edit list name*:
                                     <input type="text" name="editName" id="editName" class="form-control form-input"
                                            required>

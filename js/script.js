@@ -17,7 +17,7 @@ $('.select-table').on('change', function () {
         "<div class='table-responsive'>" +
         "<table class='table table-bordered' id='set_table'>" +
         "<tr>" +
-        "<th colspan='2'>Select columns and settings</th>"
+        "<th colspan='2'>Select columns and settings*:</th>"
         + "</tr>"
         + "</table>"
         + "</div>"
@@ -103,6 +103,7 @@ $(document).on('click', '.edit_config', function () {
 
     $.getJSON("http://localhost/tool/php/edit_table.php?edit_id=" + edit_id, function (data) {
         for(i = 0; i < data.length; i++) {
+            $("#editName").val(data[i].lists);
         }
     })
 
@@ -115,7 +116,7 @@ $(document).on('click', '.delete_config', function () {
     if (confirm("Are you sure you want to delete this table configuration?")) {
 
         $.ajax({
-            url:"php/delete.php?",
+            url:"php/delete.php",
             method: "POST",
             data:{delete_id:delete_id},
             success: function () {

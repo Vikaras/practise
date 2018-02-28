@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 26, 2018 at 02:28 PM
+-- Generation Time: Feb 28, 2018 at 07:39 AM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -30,12 +30,12 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `inventory` (
   `inv_id` int(11) NOT NULL,
-  `invcode` varchar(255) NOT NULL,
-  `description` varchar(255) NOT NULL,
-  `location` varchar(255) NOT NULL,
-  `value` varchar(255) NOT NULL,
-  `comment` varchar(255) NOT NULL,
-  `manufactid` varchar(255) NOT NULL
+  `invcode` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `location` varchar(255) DEFAULT NULL,
+  `value` varchar(255) DEFAULT NULL,
+  `comment` varchar(255) DEFAULT NULL,
+  `manufactid` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -56,6 +56,13 @@ CREATE TABLE `inventory_cols` (
   `edit` tinyint(1) NOT NULL DEFAULT '0',
   `filter` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `inventory_cols`
+--
+
+INSERT INTO `inventory_cols` (`report_id`, `inv_id`, `invcode`, `description`, `location`, `value`, `comment`, `manufactid`, `edit`, `filter`) VALUES
+(2, 1, 1, 1, 1, 1, 1, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -91,6 +98,14 @@ CREATE TABLE `reports` (
   `comments` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `reports`
+--
+
+INSERT INTO `reports` (`id`, `lists`, `table_id`, `comments`) VALUES
+(1, 'Test1', 1, 'User test'),
+(2, 'Test2', 2, 'Inventory test');
+
 -- --------------------------------------------------------
 
 --
@@ -118,13 +133,13 @@ INSERT INTO `tables` (`table_id`, `table_name`) VALUES
 
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `lastname` varchar(255) NOT NULL,
-  `birth` varchar(255) NOT NULL,
-  `phone` varchar(255) NOT NULL,
-  `job` varchar(255) NOT NULL,
-  `comment` varchar(255) NOT NULL,
-  `job_id` int(11) NOT NULL
+  `name` varchar(255) DEFAULT NULL,
+  `lastname` varchar(255) DEFAULT NULL,
+  `birth` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `job` varchar(255) DEFAULT NULL,
+  `comment` varchar(255) DEFAULT NULL,
+  `job_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -145,6 +160,13 @@ CREATE TABLE `users_cols` (
   `edit` tinyint(1) NOT NULL DEFAULT '0',
   `filter` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `users_cols`
+--
+
+INSERT INTO `users_cols` (`report_id`, `user_id`, `name`, `lastname`, `birth`, `phone`, `job`, `comment`, `edit`, `filter`) VALUES
+(1, 1, 1, 1, 1, 1, 0, 0, 1, 0);
 
 --
 -- Indexes for dumped tables
@@ -211,7 +233,7 @@ ALTER TABLE `users_cols`
 -- AUTO_INCREMENT for table `inventory_cols`
 --
 ALTER TABLE `inventory_cols`
-  MODIFY `inv_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `inv_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `job_filter`
@@ -223,7 +245,7 @@ ALTER TABLE `job_filter`
 -- AUTO_INCREMENT for table `reports`
 --
 ALTER TABLE `reports`
-  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tables`
@@ -241,7 +263,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users_cols`
 --
 ALTER TABLE `users_cols`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
