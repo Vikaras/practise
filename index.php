@@ -99,6 +99,9 @@
                                     </select>
                                 </label>
                             </div>
+                            <div class="edit-settings">
+
+                            </div>
                             <div class="form-group edit_settings">
                             </div>
                             <div class="form-group">

@@ -12,8 +12,7 @@ $.getJSON("http://localhost/tool/php/table_select.php", function (data) {
 $('.select-table').on('change', function () {
     var tbl = $(".select-table option:selected").text() + "_cols";
 
-    $('.settings').empty();
-    $('.settings').append(
+    $('.settings').empty().append(
         "<div class='table-responsive'>" +
         "<table class='table table-bordered' id='set_table'>" +
         "<tr>" +
@@ -102,10 +101,22 @@ $(document).on('click', '.edit_config', function () {
     var edit_id = $(this).data('edit-id');
 
     $.getJSON("http://localhost/tool/php/edit_table.php?edit_id=" + edit_id, function (data) {
+
+        $('.edit-settings').empty().append("<div class='table-responsive'>" +
+            "<table class='table table-bordered' id='edit_table'>" +
+            "<tr>" +
+            "<th colspan='2'>Edit columns and settings*:</th>"
+            + "</tr>"
+            + "</table>"
+            + "</div>");
+
         for(i = 0; i < data.length; i++) {
             $("#editName").val(data[i].lists);
+            $('#editComment').val(data[i].comments);
+            $("#editSelectTable").append("<option value='"+ data[i].table_id +"'>" +
+                data[i].table_name + "</option>");
         }
-    })
+    });
 
 });
 
