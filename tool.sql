@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 28, 2018 at 07:39 AM
+-- Generation Time: Mar 01, 2018 at 03:28 PM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -62,7 +62,8 @@ CREATE TABLE `inventory_cols` (
 --
 
 INSERT INTO `inventory_cols` (`report_id`, `inv_id`, `invcode`, `description`, `location`, `value`, `comment`, `manufactid`, `edit`, `filter`) VALUES
-(2, 1, 1, 1, 1, 1, 1, 1, 0, 0);
+(2, 1, 1, 1, 1, 1, 1, 1, 0, 0),
+(3, 2, 1, 1, 1, 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -95,7 +96,7 @@ CREATE TABLE `reports` (
   `id` smallint(5) UNSIGNED NOT NULL,
   `lists` varchar(255) NOT NULL,
   `table_id` int(11) NOT NULL,
-  `comments` varchar(255) NOT NULL
+  `comments` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -103,8 +104,9 @@ CREATE TABLE `reports` (
 --
 
 INSERT INTO `reports` (`id`, `lists`, `table_id`, `comments`) VALUES
-(1, 'Test1', 1, 'User test'),
-(2, 'Test2', 2, 'Inventory test');
+(1, 'Test1', 1, 'User test 1'),
+(2, 'Test2', 2, 'Inventory test'),
+(3, 'test 3', 2, 'Edit test');
 
 -- --------------------------------------------------------
 
@@ -233,7 +235,7 @@ ALTER TABLE `users_cols`
 -- AUTO_INCREMENT for table `inventory_cols`
 --
 ALTER TABLE `inventory_cols`
-  MODIFY `inv_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `inv_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `job_filter`
@@ -245,7 +247,7 @@ ALTER TABLE `job_filter`
 -- AUTO_INCREMENT for table `reports`
 --
 ALTER TABLE `reports`
-  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tables`

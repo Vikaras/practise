@@ -151,9 +151,9 @@ $('#edit_form').on('submit', function () {
     if($("[type=checkbox]:checked").length > 0){
 
         // creating array to store all checkbox values
-        var checkboxes = [];
+        var editCheckboxes = [];
         $(".edit_cols").each(function () {
-            checkboxes.push({
+            editCheckboxes.push({
                 name: $(this).data('col-name'),
                 value: $(this).val()
             });
@@ -163,24 +163,25 @@ $('#edit_form').on('submit', function () {
             url:"php/edit.php",
             method:"POST",
             data: {
-                checkboxes:JSON.stringify(checkboxes),
-                editTbl: $("#editSelectTable").val(),
+                editCheckboxes:JSON.stringify(editCheckboxes),
+                editID:$(".edit_config").data('edit-id'),
+                editTbl: $("#selectedTableID").val(),
                 editName: $("#editName").val(),
-                editComment: $("#editComment").val()
+                editComments: $("#editComment").val()
             },
 
             success: function (data) {
                 alert("Configuration updated successfully!");
                 $('.edit_config').html(data);
                 $('#edit_table_config').modal("hide");
-                location.reload();
-                window.location.href = "index.php";
+                // location.reload();
+                // window.location.href = "index.php";
             }
         })
     } else {
         alert("Fill in required fields and select one or more checkboxes to continue!");
     }
-    console.log(checkboxes);
+    console.log(editCheckboxes);
     return false;
 });
 
@@ -196,8 +197,8 @@ $(document).on('click', '.delete_config', function () {
             data: {delete_id: delete_id},
             success: function () {
                 alert('Configuration deleted successfully!');
-                location.reload();
-                window.location.href = "index.php";
+                // location.reload();
+                // window.location.href = "index.php";
             }
         });
     }
