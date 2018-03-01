@@ -64,7 +64,7 @@ $('#config_form').on('submit', function () {
             },
 
             success: function (data) {
-                alert("Data inserted successfully!");
+                alert("Configuration inserted successfully!");
                 $('.config').html(data);
                 $('#add_data_modal').modal("hide");
                 location.reload();
@@ -72,7 +72,7 @@ $('#config_form').on('submit', function () {
             }
         });
     } else {
-        alert("Select one or more checkboxes to continue!");
+        alert("Fill in required fields and select one or more checkboxes to continue!");
     }
     return false
 });
@@ -85,10 +85,10 @@ $.getJSON("http://localhost/tool/php/fetch.php?all", function (data) {
             "<td>" + data[i].lists + "</td>" +
             "<td>" + data[i].table_name + "</td>" +
             "<td>" + data[i].comments + "</td>" +
-            "<td>" + (data[i].edit === "1" ? "<input type='button' data-edit-id='" + data[i].id + "' value='Edit' " +
+            "<td>" + (data[i].edit == 1 ? "<input type='button' data-edit-id='" + data[i].id + "' value='Edit' " +
                 "class='btn btn-warning btn-xs edit_config'>" : "") + " " +
-            "<input type='button' data-delete-id='" + data[i].id +"' value='Delete'  class='btn btn-danger btn-xs delete_config'>"
-            + " <input type='button' data-view-id='" + data[i].id +"' value='View'  class='btn btn-info btn-xs view_config'> "+"</td>" +
+            "<input type='button' data-delete-id='" + data[i].id + "' value='Delete'  class='btn btn-danger btn-xs delete_config'>"
+            + " <input type='button' data-view-id='" + data[i].id + "' value='View'  class='btn btn-info btn-xs view_config'> " + "</td>" +
             "</tr>");
 
     }
@@ -96,7 +96,7 @@ $.getJSON("http://localhost/tool/php/fetch.php?all", function (data) {
 
 // CALLING MODAL TO EDIT TABLE CONFIG
 $(document).on('click', '.edit_config', function () {
-    $('#edit_table_config').modal("show");
+    $('#edit_table_modal').modal("show");
 
     var edit_id = $(this).data('edit-id');
 
@@ -111,15 +111,18 @@ $(document).on('click', '.edit_config', function () {
     // Getting current data from database
     $.getJSON("http://localhost/tool/php/edit_table.php?edit_id=" + edit_id, function (data) {
 
-            $("#editName").val(data.reportData.lists);
-            $('#editComment').val(data.reportData.comments);
-            $("#editSelectTable").css('pointer-events', 'none').append("<option value='"+ data.reportData.table_id +"'>" +
-                data.reportData.table_name + "</option>");
+        $("#editName").val(data.reportData.lists);
+        $('#editComment').val(data.reportData.comments);
+        $("#editSelectTable").empty().append("<option value='" + data.reportData.table_id + "'>" +
+            data.reportData.table_name + "</option>");
+        $("#editSelectTable").prop('disabled',true);
+
+        $("#selectedTableID").val(data.reportData.table_id);
 
         // Generating columns and checkboxes
         $("#edit_table tbody").empty();
 
-        for(var key in data.columns) {
+        for (var key in data.columns) {
             var row = $('<tr>' +
                 '<td>' + key + '</td>' +
                 '<td>' +
@@ -135,6 +138,50 @@ $(document).on('click', '.edit_config', function () {
                 .prop('checked', data.columns[key] == 1 ? true : false));
         }
     });
+    // Changing values of the checkboxes
+    $(document).on('click', '.edit_cols', function () {
+        $(this).prop("checked") ? $(this).val(1) : $(this).val(0);
+    });
+});
+
+// UPDATING CONFIGURATION TO DATABASE
+$('#edit_form').on('submit', function () {
+
+    // Checking if there are checked checkboxes
+    if($("[type=checkbox]:checked").length > 0){
+
+        // creating array to store all checkbox values
+        var checkboxes = [];
+        $(".edit_cols").each(function () {
+            checkboxes.push({
+                name: $(this).data('col-name'),
+                value: $(this).val()
+            });
+        });
+
+        $.ajax({
+            url:"php/edit.php",
+            method:"POST",
+            data: {
+                checkboxes:JSON.stringify(checkboxes),
+                editTbl: $("#editSelectTable").val(),
+                editName: $("#editName").val(),
+                editComment: $("#editComment").val()
+            },
+
+            success: function (data) {
+                alert("Configuration updated successfully!");
+                $('.edit_config').html(data);
+                $('#edit_table_config').modal("hide");
+                location.reload();
+                window.location.href = "index.php";
+            }
+        })
+    } else {
+        alert("Fill in required fields and select one or more checkboxes to continue!");
+    }
+    console.log(checkboxes);
+    return false;
 });
 
 // DELETING TABLE CONFIGURATION
@@ -144,9 +191,9 @@ $(document).on('click', '.delete_config', function () {
     if (confirm("Are you sure you want to delete this table configuration?")) {
 
         $.ajax({
-            url:"php/delete.php",
+            url: "php/delete.php",
             method: "POST",
-            data:{delete_id:delete_id},
+            data: {delete_id: delete_id},
             success: function () {
                 alert('Configuration deleted successfully!');
                 location.reload();
@@ -158,7 +205,7 @@ $(document).on('click', '.delete_config', function () {
 });
 
 // CALLING VIEW PAGE
-$(document).on('click', '.view_config',function (){
+$(document).on('click', '.view_config', function () {
     window.location.href = "/tool/insertingIndex.php";
 });
 
