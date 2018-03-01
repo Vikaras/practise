@@ -5,7 +5,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <title>Title</title>
 </head>
 <body>
@@ -58,7 +58,7 @@
                             <div class="form-group settings">
                             </div>
                             <div class="form-group">
-                                <label for="reportComment">List comment*:
+                                <label for="reportComment">List comment:
                                     <textarea name="reportComment" id="reportComment" class=" textArea form-control form-input ">
                             </textarea>
                                 </label>
@@ -102,9 +102,9 @@
 
                             </div>
                             <div class="form-group">
-                                <label for="editComment">Edit list comment*:
+                                <label for="editComment">Edit list comment:
                                     <textarea name="editComment" id="editComment"
-                                              class="form-control form-input textArea" required>
+                                              class="form-control form-input textArea">
                             </textarea>
                                 </label>
                             </div>

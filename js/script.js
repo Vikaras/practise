@@ -66,7 +66,7 @@ $('#config_form').on('submit', function () {
             success: function (data) {
                 alert("Configuration inserted successfully!");
                 $('.config').html(data);
-                // $('#add_data_modal').modal("hide");
+                $('#add_data_modal').modal("hide");
                 location.reload();
                 window.location.href = "index.php";
             }
@@ -195,8 +195,8 @@ $(document).on('click', '.delete_config', function () {
             data: {delete_id: delete_id},
             success: function () {
                 alert('Configuration deleted successfully!');
-                // location.reload();
-                // window.location.href = "index.php";
+                location.reload();
+                window.location.href = "index.php";
             }
         });
     }
