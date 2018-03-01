@@ -88,7 +88,7 @@ $.getJSON("http://localhost/tool/php/fetch.php?all", function (data) {
             "<td>" + (data[i].edit === "1" ? "<input type='button' data-edit-id='" + data[i].id + "' value='Edit' " +
                 "class='btn btn-warning btn-xs edit_config'>" : "") + " " +
             "<input type='button' data-delete-id='" + data[i].id +"' value='Delete'  class='btn btn-danger btn-xs delete_config'>"
-            + " <input type='button' data-view-id='\" + data[i].id +\"' value='View'  class='btn btn-info btn-xs view_config'> "+"</td>" +
+            + " <input type='button' data-view-id='" + data[i].id +"' value='View'  class='btn btn-info btn-xs view_config'> "+"</td>" +
             "</tr>");
 
     }
@@ -100,24 +100,41 @@ $(document).on('click', '.edit_config', function () {
 
     var edit_id = $(this).data('edit-id');
 
+    // Creating table for edit data
+    $('.edit-settings').html(
+        "<table class='table table-bordered table-responsive' id='edit_table'>" +
+        "<thead><tr>" +
+        "<th colspan='2'>Edit columns and settings*:</th>"
+        + "</tr></thead><tbody></tbody>"
+        + "</table>"
+    );
+    // Getting current data from database
     $.getJSON("http://localhost/tool/php/edit_table.php?edit_id=" + edit_id, function (data) {
 
-        $('.edit-settings').empty().append("<div class='table-responsive'>" +
-            "<table class='table table-bordered' id='edit_table'>" +
-            "<tr>" +
-            "<th colspan='2'>Edit columns and settings*:</th>"
-            + "</tr>"
-            + "</table>"
-            + "</div>");
+            $("#editName").val(data.reportData.lists);
+            $('#editComment').val(data.reportData.comments);
+            $("#editSelectTable").css('pointer-events', 'none').append("<option value='"+ data.reportData.table_id +"'>" +
+                data.reportData.table_name + "</option>");
 
-        for(i = 0; i < data.length; i++) {
-            $("#editName").val(data[i].lists);
-            $('#editComment').val(data[i].comments);
-            $("#editSelectTable").append("<option value='"+ data[i].table_id +"'>" +
-                data[i].table_name + "</option>");
+        // Generating columns and checkboxes
+        $("#edit_table tbody").empty();
+
+        for(var key in data.columns) {
+            var row = $('<tr>' +
+                '<td>' + key + '</td>' +
+                '<td>' +
+                '</td>' +
+                '</tr>');
+            $("#edit_table tbody").append(row);
+
+            row.find('td:eq(1)').append($("<input/>").attr('class', 'edit_cols')
+                .attr('name', 'checkboxes[' + key + ']')
+                .data('col-name', key)
+                .val(data.columns[key] == 1 ? 1 : 0)
+                .attr('type', 'checkbox')
+                .prop('checked', data.columns[key] == 1 ? true : false));
         }
     });
-
 });
 
 // DELETING TABLE CONFIGURATION
