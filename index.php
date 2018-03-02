@@ -95,7 +95,6 @@
                                     <select name="editSelectTable_" id="editSelectTable"
                                             class="form-control form-input edit-select-table" required>
                                     </select>
-                                    <input type="hidden" id="selectedTableID" name="editSelectTable">
                                 </label>
                             </div>
                             <div class="form-group edit-settings">

@@ -114,8 +114,10 @@ $(document).on('click', '.edit_config', function () {
         $("#editSelectTable").empty().append("<option value='" + data.reportData.table_id + "'>" +
             data.reportData.table_name + "</option>");
         $("#editSelectTable").prop('disabled',true);
-
-        $("#selectedTableID").val(data.reportData.table_id);
+        $("#editSelectTable").append("<input type='hidden' id='selectedTableID'" +
+            "name='editSelectTable' value='" + data.reportData.table_id + "'" +
+            " data-table-name='" + data.reportData.table_name + "'>");
+        // $("#selectedTableID").val(data.reportData.table_id);
 
         // Generating columns and checkboxes
         $("#edit_table tbody").empty();
@@ -164,6 +166,7 @@ $('#edit_form').on('submit', function () {
                 editCheckboxes:JSON.stringify(editCheckboxes),
                 editID:$(".edit_config").data('edit-id'),
                 editTbl: $("#selectedTableID").val(),
+                editTblName: $("#selectedTableID").data('table-name'),
                 editName: $("#editName").val(),
                 editComments: $("#editComment").val()
             },
@@ -172,14 +175,13 @@ $('#edit_form').on('submit', function () {
                 alert("Configuration updated successfully!");
                 $('.edit_config').html(data);
                 $('#edit_table_config').modal("hide");
-                // location.reload();
-                // window.location.href = "index.php";
+                location.reload();
+                window.location.href = "index.php";
             }
         })
     } else {
         alert("Fill in required fields and select one or more checkboxes to continue!");
     }
-    console.log(editCheckboxes);
     return false;
 });
 
