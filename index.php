@@ -10,8 +10,8 @@
 </head>
 <body>
 <div class="container">
-<!--TABLE WHICH HOLDS DATA FROM DB-->
-    <h1 align="center">Reports generator</h1>
+    <!--TABLE WHICH HOLDS DATA FROM DB-->
+    <h1>Reports generator</h1>
     <div class="pull-right">
         <button type="button" data-toggle="modal" data-target="#add_data_modal" class="btn btn-success">
             New report
@@ -30,8 +30,7 @@
     </div>
 </div>
 
-
-    <!--MODAL TO ADD NEW CONFIG-->
+<!--MODAL TO ADD NEW CONFIG-->
 <div id="add_data_modal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -61,8 +60,7 @@
                     </div>
                     <div class="form-group">
                         <label for="reportComment">List comment:
-                            <textarea name="reportComment" id="reportComment" class=" textArea form-control form-input ">
-                    </textarea>
+                            <textarea name="reportComment" id="reportComment" class=" textArea form-control form-input"></textarea>
                         </label>
                     </div>
                     <input type="submit" name="submit" value="Insert" class="btn btn-success">
@@ -100,13 +98,11 @@
                         </label>
                     </div>
                     <div class="form-group edit-settings">
-
                     </div>
                     <div class="form-group">
                         <label for="editComment">Edit list comment:
                             <textarea name="editComment" id="editComment"
-                                      class="form-control form-input textArea">
-                    </textarea>
+                                      class="form-control form-input textArea"></textarea>
                         </label>
                     </div>
                     <input type="submit" name="update" value="Update" class="btn btn-success">

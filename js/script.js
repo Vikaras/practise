@@ -1,6 +1,6 @@
 // FILLING SELECT OPTIONS TO SELECT TABLE
 $.getJSON("http://localhost/tool/php/table_select.php", function (data) {
-    for (i = 0; i < data.length; i++) {
+    for ( var i = 0; i < data.length; i++) {
         $('.select-table').append(
             "<option value='" + data[i].table_id + "' data-table-name='" + data[i].table_name + "'>" +
             "" + data[i].table_name + "</option>"
@@ -16,13 +16,13 @@ $('.select-table').on('change', function () {
         "<div class='table-responsive'>" +
         "<table class='table table-bordered' id='set_table'>" +
         "<tr>" +
-        "<th colspan='2'>Select columns and settings*:</th>"
+        "<th colspan='2'>Select columns*:</th>"
         + "</tr>"
         + "</table>"
         + "</div>"
     );
     $.getJSON("http://localhost/tool/php/cols.php?tbl=" + tbl, function (data) {
-        for (i = 2; i < data.length; i++) {
+        for ( var i = 2; i < data.length; i++) {
             $('#set_table').append(
                 "<tr>" +
                 "<td>" + data[i].COLUMN_NAME + "</td>" +
@@ -71,6 +71,7 @@ $('#config_form').on('submit', function () {
                 window.location.href = "index.php";
             }
         });
+
     } else {
         alert("Fill in required fields and select one or more checkboxes to continue!");
     }
@@ -79,16 +80,16 @@ $('#config_form').on('submit', function () {
 
 // FETCHING TABLE CONFIGS AND FILLING TABLE
 $.getJSON("http://localhost/tool/php/fetch.php?all", function (data) {
-    for (i = 0; i < data.length; i++) {
+    for ( var i = 0; i < data.length; i++) {
         $('#fetch_table').append("<tr>" +
             "<td>" + data[i].id + "</td>" +
             "<td>" + data[i].lists + "</td>" +
             "<td>" + data[i].table_name + "</td>" +
             "<td>" + data[i].comments + "</td>" +
             "<td>" + "<input type='button' data-delete-id='" + data[i].id + "' value='Delete'  class='btn btn-danger btn-xs delete_config'>"
-            + " <input type='button' data-view-id='" + data[i].id + "' value='View'  class='btn btn-info btn-xs view_config'> " + " "+ (data[i].edit == 1 ? "<input type='button' data-edit-id='" + data[i].id + "' value='Edit' " + "class='btn btn-warning btn-xs edit_config'>" : "") + "</td>" +
+            + "<input type='button' data-view-id='" + data[i].id + "' value='View'  class='btn btn-info btn-xs view_config'>" + (data[i].edit == 1 ? "<input type='button' data-edit-id='" + data[i].id + "' value='Edit' " + "class='btn btn-warning btn-xs edit_config'>" : "")
+            + "</td>" +
             "</tr>");
-
     }
 });
 
@@ -98,16 +99,15 @@ $(document).on('click', '.edit_config', function () {
 
     var edit_id = $(this).data('edit-id');
 
-    //console.log(edit_id);
-
     // Creating table for edit data
     $('.edit-settings').html(
         "<table class='table table-bordered table-responsive' id='edit_table'>" +
         "<thead><tr>" +
-        "<th colspan='2'>Edit columns and settings*:</th>"
+        "<th colspan='2'>Edit columns*:</th>"
         + "</tr></thead><tbody></tbody>"
         + "</table>"
     );
+
     // Getting current data from database
     $.getJSON("http://localhost/tool/php/edit_table.php?edit_id=" + edit_id, function (data) {
 
@@ -142,6 +142,7 @@ $(document).on('click', '.edit_config', function () {
                 .prop('checked', data.columns[key] == 1 ? true : false));
         }
     });
+
     // Changing values of the checkboxes
     $(document).on('click', '.edit_cols', function () {
         $(this).prop("checked") ? $(this).val(1) : $(this).val(0);
@@ -179,8 +180,8 @@ $('#edit_form').on('submit', function () {
                 alert("Configuration updated successfully!");
                 $('.edit_config').html(data);
                 $('#edit_table_config').modal("hide");
-                // location.reload();
-                // window.location.href = "index.php";
+                location.reload();
+                window.location.href = "index.php";
             }
         })
     } else {
@@ -211,7 +212,7 @@ $(document).on('click', '.delete_config', function () {
 
 // CALLING VIEW PAGE
 $(document).on('click', '.view_config', function () {
-    window.location.href = "/tool/insertingIndex.php";
+    window.location.href = "insertingIndex.php";
 });
 
 

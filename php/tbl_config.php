@@ -29,10 +29,8 @@ if(isset($_POST['checkboxes'])) {
 
     $report_id = $conn->lastInsertId();
 
-
     $sql2 = "INSERT INTO $columns_table (report_id, " . implode(", ", array_keys($colValues)). ")
     VALUES(" . $report_id . ", " . implode(", ", array_values($colValues)) . ")";
-
 
     $stmt = $conn->prepare($sql2);
 
