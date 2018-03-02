@@ -26,6 +26,7 @@ if(isset($_POST['editCheckboxes'])) {
         $sqlData[] = $value['name'] . " = '" . $value['value'] ."'";
     }
 
+    var_dump($sqlData);
     $sql2 .= implode(',', $sqlData);
     $sql2 .= " WHERE report_id = '$editID'";
 

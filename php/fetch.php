@@ -19,6 +19,8 @@ if ($stmt->execute(array($_GET['all']))) {
         $stmt1->execute();
         $cols = $stmt1->fetch(PDO::FETCH_ASSOC);
 
+        //var_dump($row, $cols);
+
         $data[] = array_merge($row, $cols);
     }
     echo json_encode($data);

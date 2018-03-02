@@ -98,6 +98,8 @@ $(document).on('click', '.edit_config', function () {
 
     var edit_id = $(this).data('edit-id');
 
+    //console.log(edit_id);
+
     // Creating table for edit data
     $('.edit-settings').html(
         "<table class='table table-bordered table-responsive' id='edit_table'>" +
@@ -115,9 +117,11 @@ $(document).on('click', '.edit_config', function () {
             data.reportData.table_name + "</option>");
         $("#editSelectTable").prop('disabled',true);
         $("#editSelectTable").append("<input type='hidden' id='selectedTableID'" +
-            "name='editSelectTable' value='" + data.reportData.table_id + "'" +
+            " name='editSelectTable' value='" + data.reportData.table_id + "'" +
             " data-table-name='" + data.reportData.table_name + "'>");
-        // $("#selectedTableID").val(data.reportData.table_id);
+
+        $("#edit_form").prepend("<input type='hidden' id='editID'" +
+            " name='editID' value='" + edit_id + "'>");
 
         // Generating columns and checkboxes
         $("#edit_table tbody").empty();
@@ -164,7 +168,7 @@ $('#edit_form').on('submit', function () {
             method:"POST",
             data: {
                 editCheckboxes:JSON.stringify(editCheckboxes),
-                editID:$(".edit_config").data('edit-id'),
+                editID: $("#editID").val(),
                 editTbl: $("#selectedTableID").val(),
                 editTblName: $("#selectedTableID").data('table-name'),
                 editName: $("#editName").val(),
@@ -175,8 +179,8 @@ $('#edit_form').on('submit', function () {
                 alert("Configuration updated successfully!");
                 $('.edit_config').html(data);
                 $('#edit_table_config').modal("hide");
-                location.reload();
-                window.location.href = "index.php";
+                // location.reload();
+                // window.location.href = "index.php";
             }
         })
     } else {
