@@ -2,9 +2,11 @@
 
 include "db.php";
 
+$view_id = $_GET['view_id'];
+
 $stmt = $conn->prepare("SELECT * FROM reports
  LEFT JOIN tables ON reports.table_id = tables.table_id
- WHERE id = '".$_GET['view_id']."' LIMIT 1");
+ WHERE id = '$view_id' LIMIT 1");
 
 if ($stmt->execute(array())) {
     $data = array();

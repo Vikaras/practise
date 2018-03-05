@@ -34,5 +34,5 @@
     </div>
 </div>
 </body>
-<script src="js/script.js"></script>
+<script src="js/config.js"></script>
 </html>
