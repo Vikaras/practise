@@ -217,4 +217,33 @@ $(document).on('click', '.view_config', function () {
     window.location.href = "config_index.php?view_id=" + view_id;
 });
 
+//GETTING VIEW PAGE ID TO FILL INFO
+$.urlParam = function(name){
+    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    if (results==null){
+        return null;
+    }
+    else{
+        return decodeURI(results[1]) || 0;
+    }
+};
+
+var view_id = $.urlParam('view_id');
+
+$.getJSON("http://localhost/tool/php/config_name.php?view_id=" + view_id, function(data) {
+    for (var i = 0; i < data.length; i++) {
+        $(".config-name").append("<h1>" + data[i].lists +"</h1>");
+        $(".add-btn").append("<button type='button' data-toggle='modal'" +
+            " data-target='#fill_data_modal' class='btn btn-success new-fill' " +
+            " data-fill-table='" + data[i].table_name +"'>" +"Add new" + "</button>");
+    }
+});
+
+// GETTING INPUTS TO FILL IN
+// $(document).on('click','.new-fill', function () {
+//
+// });
+$.getJSON();
+
+
 

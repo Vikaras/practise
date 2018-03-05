@@ -11,17 +11,28 @@
 <body>
 <div class="container">
     <!--TABLE WHICH HOLDS DATA FROM DB-->
-        <div class="config-name"></div>
-        <div class="pull-right">
-            <button type="button" data-toggle="modal" data-target="#config_data_modal" class="btn btn-success">
-                Add new
-            </button>
-        </div>
-        <div id="config_data">
+    <div class="config-name"></div>
+    <div class="pull-right add-btn"></div>
+    <div id="config_data"></div>
+</div>
 
+<!--MODAL TO FILL IN CONFIG-->
+<div id="fill_data_modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header fill-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Fill in the fields</h4>
+            </div>
+<!--            FILL IN MODAL WITH DATA TO INSERT-->
+                <div class="modal-body fill-details">
+                    <form action="" method="post" id="fill_form">
+                        <input type="submit" name="submit" value="Insert" class="btn btn-success">
+                    </form>
+                </div>
         </div>
-        </div>
+    </div>
 </div>
 </body>
-<script src="js/config.js"></script>
+<script src="js/script.js"></script>
 </html>
