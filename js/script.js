@@ -88,7 +88,7 @@ $.getJSON("http://localhost/tool/php/fetch.php?all", function (data) {
             "<td>" + data[i].comments + "</td>" +
             "<td>" + "<input type='button' data-delete-id='" + data[i].id + "' value='Delete'  class='btn btn-danger btn-xs delete_config'>"
             + "<input type='button' data-view-id='" + data[i].id + "' value='View'  class='btn btn-info btn-xs view_config'>"
-            + (data[i].edit == 1 ? "<input type='button' data-edit-id='" + data[i].id + "' value='Edit' " + "class='btn btn-warning btn-xs edit_config'>" : "")
+            + "<input type='button' data-edit-id='" + data[i].id + "' value='Edit' " + "class='btn btn-warning btn-xs edit_config'>"
             + "</td>" +
             "</tr>");
     }
