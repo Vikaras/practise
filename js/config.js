@@ -31,7 +31,7 @@ $(document).on('click', '.new-fill', function () {
     $.getJSON("http://localhost/tool/php/fill_config.php?fill_table=" + fill_table + "&fill_id=" + fill_id, function (data) {
         for (var i in data) {
             if (data[i] == 1 && ["report_id","user_id","inv_id","edit","filter"].indexOf(i) === -1 ) {
-                $('.input-wrap').append("<label>" + i + "</label>"
+                $('.input-wrap').append("<label>" + i.charAt(0).toUpperCase() + i.substr(1) + "</label>"
                     + "<input type='text' class='form-control form-input'>");
             }
         }
