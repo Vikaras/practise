@@ -24,13 +24,13 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Fill in the fields</h4>
             </div>
-<!--            FILL IN MODAL WITH DATA TO INSERT-->
-                <div class="modal-body fill-details">
-                    <form action="" method="post" id="fill_form">
-                        <div class="form-group input-wrap"></div>
-                        <input type="submit" name="submit" value="Insert" class="btn btn-success">
-                    </form>
-                </div>
+            <!--            FILL IN MODAL WITH DATA TO INSERT-->
+            <div class="modal-body fill-details">
+                <form action="" method="post" id="fill_form">
+                    <div class="input-wrap"></div>
+                    <input type="submit" name="submit" value="Insert" class="btn btn-success">
+                </form>
+            </div>
         </div>
     </div>
 </div>

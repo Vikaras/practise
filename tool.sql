@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 06, 2018 at 10:18 AM
+-- Generation Time: Mar 06, 2018 at 10:57 AM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -34,8 +34,8 @@ CREATE TABLE `inventory` (
   `description` varchar(255) DEFAULT NULL,
   `location` varchar(255) DEFAULT NULL,
   `value` varchar(255) DEFAULT NULL,
-  `comment` varchar(255) DEFAULT NULL,
-  `manufactid` varchar(255) DEFAULT NULL
+  `manufactid` varchar(255) DEFAULT NULL,
+  `comment` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
