@@ -60,7 +60,7 @@
                     </div>
                     <div class="form-group">
                         <label for="reportComment">List comment:
-                            <textarea name="reportComment" id="reportComment" class=" textArea form-control form-input"></textarea>
+                            <textarea name="reportComment" id="reportComment" class="form-control form-input"></textarea>
                         </label>
                     </div>
                     <input type="submit" name="submit" value="Insert" class="btn btn-success">
@@ -102,7 +102,7 @@
                     <div class="form-group">
                         <label for="editComment">Edit list comment:
                             <textarea name="editComment" id="editComment"
-                                      class="form-control form-input textArea"></textarea>
+                                      class="form-control form-input"></textarea>
                         </label>
                     </div>
                     <input type="submit" name="update" value="Update" class="btn btn-success">
