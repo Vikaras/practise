@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 01, 2018 at 03:28 PM
+-- Generation Time: Mar 06, 2018 at 10:18 AM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -62,8 +62,8 @@ CREATE TABLE `inventory_cols` (
 --
 
 INSERT INTO `inventory_cols` (`report_id`, `inv_id`, `invcode`, `description`, `location`, `value`, `comment`, `manufactid`, `edit`, `filter`) VALUES
-(2, 1, 1, 1, 1, 1, 1, 1, 0, 0),
-(3, 2, 1, 1, 1, 1, 1, 1, 1, 1);
+(3, 1, 1, 1, 1, 0, 0, 0, 1, 1),
+(4, 2, 0, 0, 0, 1, 1, 1, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -104,9 +104,10 @@ CREATE TABLE `reports` (
 --
 
 INSERT INTO `reports` (`id`, `lists`, `table_id`, `comments`) VALUES
-(1, 'Test1', 1, 'User test 1'),
-(2, 'Test2', 2, 'Inventory test'),
-(3, 'test 3', 2, 'Edit test');
+(1, 'UsersEdit', 1, 'With edit'),
+(2, 'Users', 1, 'No edit'),
+(3, 'InventoryEdit', 2, 'With Edit'),
+(4, 'Inventory', 2, 'No edit');
 
 -- --------------------------------------------------------
 
@@ -136,7 +137,7 @@ INSERT INTO `tables` (`table_id`, `table_name`) VALUES
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `lastname` varchar(255) DEFAULT NULL,
+  `surname` varchar(255) DEFAULT NULL,
   `birth` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `job` varchar(255) DEFAULT NULL,
@@ -154,7 +155,7 @@ CREATE TABLE `users_cols` (
   `report_id` smallint(5) UNSIGNED NOT NULL,
   `user_id` int(11) NOT NULL,
   `name` tinyint(1) NOT NULL DEFAULT '0',
-  `lastname` tinyint(1) NOT NULL DEFAULT '0',
+  `surname` tinyint(1) NOT NULL DEFAULT '0',
   `birth` tinyint(1) NOT NULL DEFAULT '0',
   `phone` tinyint(1) NOT NULL DEFAULT '0',
   `job` tinyint(1) NOT NULL DEFAULT '0',
@@ -167,8 +168,9 @@ CREATE TABLE `users_cols` (
 -- Dumping data for table `users_cols`
 --
 
-INSERT INTO `users_cols` (`report_id`, `user_id`, `name`, `lastname`, `birth`, `phone`, `job`, `comment`, `edit`, `filter`) VALUES
-(1, 1, 1, 1, 1, 1, 0, 0, 1, 0);
+INSERT INTO `users_cols` (`report_id`, `user_id`, `name`, `surname`, `birth`, `phone`, `job`, `comment`, `edit`, `filter`) VALUES
+(1, 1, 1, 1, 1, 0, 0, 0, 1, 1),
+(2, 2, 0, 0, 0, 1, 1, 1, 0, 1);
 
 --
 -- Indexes for dumped tables
@@ -247,7 +249,7 @@ ALTER TABLE `job_filter`
 -- AUTO_INCREMENT for table `reports`
 --
 ALTER TABLE `reports`
-  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tables`
@@ -265,7 +267,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users_cols`
 --
 ALTER TABLE `users_cols`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
