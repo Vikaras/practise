@@ -68,7 +68,6 @@ $('#config_form').on('submit', function () {
                 $('.config').html(data);
                 $('#add_data_modal').modal("hide");
                 location.reload();
-                window.location.href = "index.php";
             }
         });
 
@@ -182,7 +181,6 @@ $('#edit_form').on('submit', function () {
                 $('.edit_config').html(data);
                 $('#edit_table_config').modal("hide");
                 location.reload();
-                window.location.href = "index.php";
             }
         })
     } else {
@@ -204,7 +202,6 @@ $(document).on('click', '.delete_config', function () {
             success: function () {
                 alert('Configuration deleted successfully!');
                 location.reload();
-                window.location.href = "index.php";
             }
         });
     }
