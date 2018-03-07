@@ -19,16 +19,34 @@ $('.select-table').on('change', function () {
         "<th colspan='2'>Select columns*:</th>"
         + "</tr>"
         + "</table>"
+        +"<table class='table table-bordered' id='set_options'>" +
+        "<tr>" +
+        "<th colspan='2'>Select options*:</th>"
+        + "</tr>"
+        + "</table>"
         + "</div>"
     );
+
     $.getJSON("http://localhost/tool/php/cols.php?tbl=" + tbl, function (data) {
         for ( var i = 2; i < data.length; i++) {
-            $('#set_table').append(
-                "<tr>" +
-                "<td>" + data[i].COLUMN_NAME + "</td>" +
-                "<td>" + "<input class='check_cols' type='checkbox' name='checkboxes[" + data[i].COLUMN_NAME + "]' data-col-name='" + data[i].COLUMN_NAME + "' value='0'>" + "</td>"
-                + "</tr>"
-            );
+            console.log(data[i].COLUMN_NAME);
+            if(data[i].COLUMN_NAME === "edit" || data[i].COLUMN_NAME === "filter" ){
+
+                $('#set_options').append(
+                    "<tr>" +
+                    "<td>" + data[i].COLUMN_NAME + "</td>" +
+                    "<td>" + "<input class='check_cols' type='checkbox' name='checkboxes[" + data[i].COLUMN_NAME + "]' data-col-name='" + data[i].COLUMN_NAME + "' value='0'>" + "</td>"
+                    + "</tr>"
+                )}
+            else {
+                if (data[i].COLUMN_NAME === "edit" || data[i].COLUMN_NAME === "filter") {
+                    continue;
+                }$('#set_table').append(
+                    "<tr>" +
+                    "<td>" + data[i].COLUMN_NAME + "</td>" +
+                    "<td>" + "<input class='check_cols' type='checkbox' name='checkboxes[" + data[i].COLUMN_NAME + "]' data-col-name='" + data[i].COLUMN_NAME + "' value='0'>" + "</td>"
+                    + "</tr>"
+                );}
             // ADDING VALUES TO CHECKBOXES
             $(document).on('click', '.check_cols', function () {
                 $(this).prop("checked") ? $(this).val(1) : $(this).val(0);
@@ -88,7 +106,7 @@ $.getJSON("http://localhost/tool/php/fetch.php?all", function (data) {
             "<td>" + data[i].comments + "</td>" +
             "<td>" + "<input type='button' data-delete-id='" + data[i].id + "' value='Delete'  class='btn btn-danger btn-xs delete_config'>"
             + "<input type='button' data-view-id='" + data[i].id + "' value='View'  class='btn btn-info btn-xs view_config'>"
-            + "<input type='button' data-edit-id='" + data[i].id + "' value='Edit' " + "class='btn btn-warning btn-xs edit_config'>"
+            +  "<input type='button' data-edit-id='" + data[i].id + "' value='Edit' " + "class='btn btn-warning btn-xs edit_config'>"
             + "</td>" +
             "</tr>");
     }
