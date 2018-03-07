@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 06, 2018 at 10:57 AM
+-- Generation Time: Mar 07, 2018 at 10:36 AM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -30,13 +30,20 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `inventory` (
   `inv_id` int(11) NOT NULL,
-  `invcode` varchar(255) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `location` varchar(255) DEFAULT NULL,
-  `value` varchar(255) DEFAULT NULL,
-  `manufactid` varchar(255) DEFAULT NULL,
-  `comment` varchar(255) DEFAULT NULL
+  `invcode` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `location` varchar(255) NOT NULL,
+  `value` varchar(255) NOT NULL,
+  `manufactid` varchar(255) NOT NULL,
+  `comment` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `inventory`
+--
+
+INSERT INTO `inventory` (`inv_id`, `invcode`, `description`, `location`, `value`, `manufactid`, `comment`) VALUES
+(1, '1337', 'Software', 'Storage', '1000', '', '');
 
 -- --------------------------------------------------------
 
@@ -51,8 +58,8 @@ CREATE TABLE `inventory_cols` (
   `description` tinyint(1) NOT NULL DEFAULT '0',
   `location` tinyint(1) NOT NULL DEFAULT '0',
   `value` tinyint(1) NOT NULL DEFAULT '0',
-  `comment` tinyint(1) NOT NULL DEFAULT '0',
   `manufactid` tinyint(1) NOT NULL DEFAULT '0',
+  `comment` tinyint(1) NOT NULL DEFAULT '0',
   `edit` tinyint(1) NOT NULL DEFAULT '0',
   `filter` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -61,9 +68,8 @@ CREATE TABLE `inventory_cols` (
 -- Dumping data for table `inventory_cols`
 --
 
-INSERT INTO `inventory_cols` (`report_id`, `inv_id`, `invcode`, `description`, `location`, `value`, `comment`, `manufactid`, `edit`, `filter`) VALUES
-(3, 1, 1, 1, 1, 0, 0, 0, 1, 1),
-(4, 2, 0, 0, 0, 1, 1, 1, 0, 1);
+INSERT INTO `inventory_cols` (`report_id`, `inv_id`, `invcode`, `description`, `location`, `value`, `manufactid`, `comment`, `edit`, `filter`) VALUES
+(2, 1, 1, 1, 1, 1, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -104,10 +110,8 @@ CREATE TABLE `reports` (
 --
 
 INSERT INTO `reports` (`id`, `lists`, `table_id`, `comments`) VALUES
-(1, 'UsersEdit', 1, 'With edit'),
-(2, 'Users', 1, 'No edit'),
-(3, 'InventoryEdit', 2, 'With Edit'),
-(4, 'Inventory', 2, 'No edit');
+(1, 'Birthday list', 1, ''),
+(2, 'Item list', 2, '');
 
 -- --------------------------------------------------------
 
@@ -136,14 +140,21 @@ INSERT INTO `tables` (`table_id`, `table_name`) VALUES
 
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `surname` varchar(255) DEFAULT NULL,
-  `birth` varchar(255) DEFAULT NULL,
-  `phone` varchar(255) DEFAULT NULL,
-  `job` varchar(255) DEFAULT NULL,
-  `comment` varchar(255) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `surname` varchar(255) NOT NULL,
+  `birth` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `job` varchar(255) NOT NULL,
+  `comment` varchar(255) NOT NULL,
   `job_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `name`, `surname`, `birth`, `phone`, `job`, `comment`, `job_id`) VALUES
+(1, 'Kovaldas', 'Kominskis', '1991-12-12', '+37063048487', '', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -169,8 +180,7 @@ CREATE TABLE `users_cols` (
 --
 
 INSERT INTO `users_cols` (`report_id`, `user_id`, `name`, `surname`, `birth`, `phone`, `job`, `comment`, `edit`, `filter`) VALUES
-(1, 1, 1, 1, 1, 0, 0, 0, 1, 1),
-(2, 2, 0, 0, 0, 1, 1, 1, 0, 1);
+(1, 1, 1, 1, 1, 1, 0, 0, 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -234,10 +244,16 @@ ALTER TABLE `users_cols`
 --
 
 --
+-- AUTO_INCREMENT for table `inventory`
+--
+ALTER TABLE `inventory`
+  MODIFY `inv_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `inventory_cols`
 --
 ALTER TABLE `inventory_cols`
-  MODIFY `inv_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `inv_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `job_filter`
@@ -249,7 +265,7 @@ ALTER TABLE `job_filter`
 -- AUTO_INCREMENT for table `reports`
 --
 ALTER TABLE `reports`
-  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tables`
@@ -261,13 +277,13 @@ ALTER TABLE `tables`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users_cols`
 --
 ALTER TABLE `users_cols`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
@@ -277,7 +293,7 @@ ALTER TABLE `users_cols`
 -- Constraints for table `inventory`
 --
 ALTER TABLE `inventory`
-  ADD CONSTRAINT `inventory_ibfk_1` FOREIGN KEY (`inv_id`) REFERENCES `inventory_cols` (`inv_id`);
+  ADD CONSTRAINT `inventory_ibfk_1` FOREIGN KEY (`inv_id`) REFERENCES `inventory_cols` (`inv_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `inventory_cols`
@@ -295,8 +311,8 @@ ALTER TABLE `reports`
 -- Constraints for table `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users_cols` (`user_id`),
-  ADD CONSTRAINT `users_ibfk_3` FOREIGN KEY (`job_id`) REFERENCES `job_filter` (`job_id`);
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users_cols` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `users_ibfk_2` FOREIGN KEY (`job_id`) REFERENCES `job_filter` (`job_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `users_cols`

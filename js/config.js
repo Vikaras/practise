@@ -18,6 +18,8 @@ $.getJSON("http://localhost/tool/php/config_name.php?view_id=" + view_id, functi
             " data-target='#fill_data_modal' class='btn btn-success new-fill' " +
             " data-fill-table='" + data[i].table_name + "'" +
             " data-fill-id='" + data[i].id + "'>" + "Add new" + "</button>");
+        $('#fill_form').append("<input type='submit' name='submit' value='Insert' class='btn btn-success table-name'" +
+            " data-table-name='" + data[i].table_name + "'>")
     }
 });
 
@@ -47,9 +49,10 @@ $(document).on('click', '.new-fill', function () {
 // INSERTING INPUT VALUES TO DATABASE
 $('#fill_form').on('submit', function () {
 
+var table = $('.table-name').data('table-name');
+
     // checking if inputs are not empty
-    $('.fill-input').each(function () {
-        if ($(this).val() != "") {
+        if ($('.fill-input').val() != "") {
 
             // creating array to hold data
             var inputData = [];
@@ -66,19 +69,22 @@ $('#fill_form').on('submit', function () {
                 method: "POST",
                 data: {
                     inputData: JSON.stringify(inputData),
-                    table: $(this).data('fill-table')
+                    table: table
                 },
 
                 success: function (data) {
                     alert("Data inserted successfully!");
                     $('.fill-details').html(data);
                     $('#fill_data_modal').modal("hide");
+                    location.reload();
                 }
             })
 
         } else {
             alert('Please fill in all fields to continue!');
         }
-    });
     return false;
 });
+
+//FETCHING AND DISPLAYING CONFIGURATION CONTENT IN TABLE
+

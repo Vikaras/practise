@@ -28,7 +28,6 @@
             <div class="modal-body fill-details">
                 <form action="" method="post" id="fill_form">
                     <div class="input-wrap"></div>
-                    <input type="submit" name="submit" value="Insert" class="btn btn-success">
                 </form>
             </div>
         </div>
