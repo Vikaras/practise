@@ -29,7 +29,6 @@ $('.select-table').on('change', function () {
 
     $.getJSON("http://localhost/tool/php/cols.php?tbl=" + tbl, function (data) {
         for ( var i = 2; i < data.length; i++) {
-            console.log(data[i].COLUMN_NAME);
             if(data[i].COLUMN_NAME === "edit" || data[i].COLUMN_NAME === "filter" ){
 
                 $('#set_options').append(
@@ -145,6 +144,7 @@ $(document).on('click', '.edit_config', function () {
         $("#edit_table tbody").empty();
 
         for (var key in data.columns) {
+            console.log(row);
             var row = $('<tr>' +
                 '<td>' + key + '</td>' +
                 '<td>' +
