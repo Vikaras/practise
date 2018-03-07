@@ -85,3 +85,6 @@ var table = $('.table-name').data('table-name');
         }
     return false;
 });
+
+//FETCHING AND DISPLAYING CONFIGURATION CONTENT IN TABLE
+
