@@ -33,7 +33,7 @@ $stmt->execute();
 $columns = $stmt->fetch(PDO::FETCH_ASSOC);
 
 foreach($columns as $column_name => $column_value) {
-    if(in_array($column_name, ['report_id', 'user_id', 'inv_id'])) continue;
+    if(in_array($column_name, ['report_id', 'user_id', 'inventory_id'])) continue;
 
     $columnsData[$column_name] = $column_value;
 }

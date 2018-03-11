@@ -22,7 +22,7 @@ $('.select-table').on('change', function () {
         + "</div>"
     );
     $.getJSON("http://localhost/tool/php/cols.php?tbl=" + tbl, function (data) {
-        for ( var i = 2; i < data.length; i++) {
+        for ( var i = 1; i < data.length; i++) {
             $('#set_table').append(
                 "<tr>" +
                 "<td>" + data[i].COLUMN_NAME + "</td>" +

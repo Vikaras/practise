@@ -1,0 +1,4 @@
+1.Remove edit and filter from columns table to options table
+2.Add edit to configs entries
+
+

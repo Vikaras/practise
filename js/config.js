@@ -69,7 +69,8 @@ var table = $('.table-name').data('table-name');
                 method: "POST",
                 data: {
                     inputData: JSON.stringify(inputData),
-                    table: table
+                    table: table,
+                    report_id: $("#report_id").val()
                 },
 
                 success: function (data) {
@@ -86,5 +87,4 @@ var table = $('.table-name').data('table-name');
     return false;
 });
 
-//FETCHING AND DISPLAYING CONFIGURATION CONTENT IN TABLE
 
