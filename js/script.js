@@ -28,7 +28,7 @@ $('.select-table').on('change', function () {
     );
 
     $.getJSON("http://localhost/tool/php/cols.php?tbl=" + tbl, function (data) {
-        for ( var i = 2; i < data.length; i++) {
+        for ( var i = 1; i < data.length; i++) {
             if(data[i].COLUMN_NAME === "edit" || data[i].COLUMN_NAME === "filter" ){
 
                 $('#set_options').append(
